@@ -27,35 +27,45 @@
 
   /* Pengaturan Mobile Menu */
   @media (max-width: 950px) {
+    /* Pastikan navbar menjadi flex row dengan jarak kiri-kanan */
     .navbar {
         display: flex !important;
+        flex-direction: row !important;
         justify-content: space-between !important;
         align-items: center !important;
         position: relative !important;
         padding: 15px 20px !important;
     }
 
+    /* Pastikan logo di kiri dan aman */
+    .navbar .logo {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    /* Tampilkan tombol hamburger di kanan */
     .menu-toggle {
         display: flex !important;
     }
 
-    /* Gaya Kotak Dropdown Melayang ala Portofolio */
+    /* Kotak dropdown melayang pas di pojok kanan atas */
     .navbar .menu {
         display: none !important;
         flex-direction: column !important;
         position: absolute !important;
-        top: 75px !important; /* Jarak pas di bawah navbar */
-        right: 20px !important; /* Menempel di sisi kanan */
-        width: 200px !important; /* Lebar kotak tidak memenuhi layar */
-        background-color: #0b2545 !important; /* Warna latar belakang gelap elegan */
-        border-radius: 12px !important; /* Sudut melengkung */
-        padding: 15px 0 !important;
+        top: 100% !important; /* Tepat menempel di bawah garis navbar */
+        right: 20px !important;
+        width: 200px !important;
+        background-color: #0b2545 !important;
+        border-radius: 12px !important;
+        padding: 10px 0 !important;
         box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
-        text-align: left !important; /* Teks rata kiri di dalam kotak */
+        text-align: left !important;
         z-index: 9999 !important;
     }
 
-    /* Tampilkan menu saat diklik */
+    /* Tampilkan menu saat kelas .active aktif */
     .navbar .menu.active {
         display: flex !important;
     }
@@ -67,14 +77,12 @@
 
     .navbar .menu li a {
         display: block !important;
-        padding: 12px 20px !important;
+        padding: 10px 20px !important;
         color: #ffffff !important;
         font-size: 15px !important;
         text-decoration: none !important;
-        transition: background 0.2s;
     }
 
-    /* Efek hover saat disentuh */
     .navbar .menu li a:hover {
         background-color: rgba(255, 255, 255, 0.1);
     }
