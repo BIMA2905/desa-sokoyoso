@@ -57,7 +57,7 @@
         top: 100% !important; /* Tepat menempel di bawah garis navbar */
         right: 20px !important;
         width: 200px !important;
-        background-color: #0b2545 !important;
+        background-color: #004d40 !important;
         border-radius: 12px !important;
         padding: 10px 0 !important;
         box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
