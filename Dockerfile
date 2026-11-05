@@ -14,14 +14,22 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build
 
-# Konfigurasi Nginx agar mendengarkan port 8080
+# Konfigurasi Nginx lengkap dengan penanganan file statis
 RUN echo 'server {\n\
     listen 8080;\n\
     index index.php index.html;\n\
     root /var/www/public;\n\
+    \n\
     location / {\n\
         try_files $uri $uri/ /index.php?$query_string;\n\
     }\n\
+    \n\
+    location ~* \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {\n\
+        expires max;\n\
+        log_not_found off;\n\
+        try_files $uri =404;\n\
+    }\n\
+    \n\
     location ~ \.php$ {\n\
         include fastcgi_params;\n\
         fastcgi_pass 127.0.0.1:9000;\n\
