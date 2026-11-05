@@ -1,12 +1,10 @@
 FROM php:8.2-fpm
 
-# Install sistem dependensi, ekstensi PHP, Nginx, dan Node.js
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libonig-dev libxml2-dev zip unzip nginx nodejs npm
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
@@ -14,13 +12,11 @@ WORKDIR /var/www
 COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
-
-# Install dependensi npm & build aset Tailwind/Vite
 RUN npm install && npm run build
 
-# Atur konfigurasi default Nginx agar mengarah ke folder public Laravel
+# Konfigurasi Nginx agar mendengarkan port 8080
 RUN echo 'server {\n\
-    listen 80;\n\
+    listen 8080;\n\
     index index.php index.html;\n\
     root /var/www/public;\n\
     location / {\n\
@@ -34,10 +30,8 @@ RUN echo 'server {\n\
     }\n\
 }' > /etc/nginx/sites-available/default
 
-# Atur hak akses storage & cache
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-EXPOSE 80
+EXPOSE 8080
 
-# Jalankan PHP-FPM dan Nginx secara bersamaan
 CMD service nginx start && php-fpm
