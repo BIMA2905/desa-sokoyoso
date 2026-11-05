@@ -1,4 +1,4 @@
-* {
+*, ::after, ::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -16,6 +16,7 @@ body {
   align-items: center;
   padding: 15px 8%;
   background: #00695c;
+  position: relative;
 }
 
 .logo {
@@ -92,6 +93,7 @@ section h2 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
+
 .pengurus {
   background: #ffffff;
 }
@@ -235,13 +237,6 @@ section h2 {
   line-height: 1.6;
 }
 
-@media(max-width: 768px) {
-  .agenda-card {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
 .kontak-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -277,13 +272,65 @@ footer {
   padding: 20px;
 }
 
-@media(max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 15px;
+/* ==========================================
+   MOBILE RESPONSIVE & HAMBURGER MENU CONFIG
+   ========================================== */
+
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 950px) {
+  .menu-toggle {
+    display: flex !important;
   }
 
-  .menu {
+  .navbar .menu {
+    display: none !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #00695c !important;
+    padding: 20px 0 !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
+    text-align: center !important;
+    z-index: 9999 !important;
+  }
+
+  .navbar .menu.active {
+    display: flex !important;
+  }
+
+  .navbar .menu li {
+    margin: 12px 0 !important;
+  }
+
+  .navbar .menu li a {
+    color: #ffffff !important;
+    font-size: 16px !important;
+  }
+
+  .kontak-container {
+    grid-template-columns: 1fr;
+  }
+
+  .agenda-card {
     flex-direction: column;
     text-align: center;
   }
@@ -292,82 +339,13 @@ footer {
     font-size: 35px;
   }
 
-  .kontak-container {
-    grid-template-columns: 1fr;
+  .menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
   }
-}
-
-/* Sembunyikan tombol hamburger secara default di desktop */
-.menu-toggle {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 28px;
-    height: 20px;
-}
-
-.menu-toggle span {
-    display: block;
-    height: 3px;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-/* Pengaturan Responsif Mobile */
-@media (max-width: 950px) {
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        padding: 15px 20px;
-    }
-
-    /* Tampilkan tombol hamburger di mobile */
-    .menu-toggle {
-        display: flex !important;
-    }
-
-    /* PAKSA sembunyikan seluruh elemen menu di HP secara default */
-    .navbar .menu {
-        display: none !important;
-        flex-direction: column !important;
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        width: 100% !important;
-        background-color: #00695c !important;
-        padding: 20px 0 !important;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
-        text-align: center !important;
-        z-index: 9999 !important;
-    }
-
-    /* Hanya munculkan ketika kelas .active ditambahkan oleh JavaScript */
-    .navbar .menu.active {
-        display: flex !important;
-    }
-
-    .navbar .menu li {
-        margin: 12px 0 !important;
-    }
-
-    .navbar .menu li a {
-        color: #ffffff !important;
-        font-size: 16px !important;
-    }
-
-    /* Animasi garis hamburger */
-    .menu-toggle.is-active span:nth-child(1) {
-        transform: translateY(8.5px) rotate(45deg);
-    }
-    .menu-toggle.is-active span:nth-child(2) {
-        opacity: 0;
-    }
-    .menu-toggle.is-active span:nth-child(3) {
-        transform: translateY(-8.5px) rotate(-45deg);
-    }
+  .menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+  }
 }
