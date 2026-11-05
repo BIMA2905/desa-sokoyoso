@@ -305,70 +305,83 @@ footer {
     color: #fff;
 }
 
-/* Pengaturan Mobile Menu (Screen <= 950px) */
-/* Default Desktop: Tombol Hamburger Disembunyikan Total */
+/* 1. Sembunyikan Tombol Hamburger di Layar Komputer / Desktop */
 .menu-toggle {
     display: none;
     cursor: pointer;
     flex-direction: column;
     justify-content: space-between;
-    width: 30px;
-    height: 21px;
+    width: 28px;
+    height: 20px;
+    z-index: 1000;
 }
 
 .menu-toggle span {
     display: block;
     height: 3px;
     width: 100%;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 3px;
     transition: all 0.3s ease;
 }
 
-/* Pengaturan untuk Layanan Mobile (<= 950px) */
+/* 2. Tampilan Khusus Mobile (Layar <= 950px) */
 @media (max-width: 950px) {
-    .menu-toggle {
-        display: flex; /* Muncul hanya di mobile */
-    }
-
     .navbar {
-        position: relative;
+        display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 15px 20px;
+        position: relative;
     }
 
-    /* Menu disembunyikan secara default di mobile */
-    .navbar .menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #0b3c5d; /* Warna latar belakang dropdown mobile */
-        padding: 20px 0;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        text-align: center;
-        z-index: 999;
+    /* Tampilkan ikon hamburger di kanan header */
+    .menu-toggle {
+        display: flex !important;
     }
 
-    /* Ketika kelas .active aktif, menu tampil ke bawah */
-    .navbar .menu.active {
+    /* SEMBUNYIKAN daftar menu secara mutlak di kondisi awal */
+    .navbar .menu,
+    .navbar ul.menu,
+    ul#menu-list {
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background-color: #00695c !important; /* Warna hijau navbar desa Anda */
+        padding: 20px 0 !important;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
+        text-align: center !important;
+        z-index: 999 !important;
+    }
+
+    /* Tampilkan menu HANYA saat tombol hamburger diklik (class .active ditambahkan) */
+    .navbar .menu.active,
+    .navbar ul.menu.active,
+    ul#menu-list.active {
         display: flex !important;
     }
 
     .navbar .menu li {
-        margin: 12px 0;
+        margin: 12px 0 !important;
     }
 
-    /* Animasi ikon hamburger menjadi tanda silang (X) saat diklik */
+    .navbar .menu li a {
+        color: #ffffff !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+    }
+
+    /* Animasi garis hamburger berubah jadi 'X' saat diklik */
     .menu-toggle.is-active span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
+        transform: translateY(8.5px) rotate(45deg);
     }
     .menu-toggle.is-active span:nth-child(2) {
         opacity: 0;
     }
     .menu-toggle.is-active span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+        transform: translateY(-8.5px) rotate(-45deg);
     }
 }

@@ -319,15 +319,17 @@
   </footer>
 
   <script>
-  const mobileMenu = document.getElementById('mobile-menu');
-  const navMenu = document.getElementById('menu-list');
+  document.addEventListener('DOMContentLoaded', function () {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navMenu = document.getElementById('menu-list');
 
-  if (mobileMenu && navMenu) {
-    mobileMenu.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      mobileMenu.classList.toggle('is-active');
-    });
-  }
+    if (mobileMenu && navMenu) {
+      mobileMenu.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('is-active');
+      });
+    }
+  });
 </script>
 </body>
 </html>
