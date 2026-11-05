@@ -17,12 +17,14 @@
     <h2>Desa Sokoyoso</h2>
   </div>
 
-  <!-- Tombol Hamburger untuk Mobile -->
+  <!-- Tombol Hamburger (Khusus Mobile) -->
   <div class="menu-toggle" id="mobile-menu">
-    <i class="fa-solid fa-bars"></i>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 
-  <ul class="menu">
+  <ul class="menu" id="menu-list">
     <li><a href="#home">Home</a></li>
     <li><a href="#profil">Profil Desa</a></li>
     <li><a href="#layanan">Layanan</a></li>
@@ -318,14 +320,14 @@
 
   <script>
   const mobileMenu = document.getElementById('mobile-menu');
-  const navMenu = document.querySelector('.navbar .menu');
+  const navMenu = document.getElementById('menu-list');
 
-  mobileMenu.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    const icon = mobileMenu.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-xmark');
-  });
+  if (mobileMenu && navMenu) {
+    mobileMenu.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenu.classList.toggle('is-active');
+    });
+  }
 </script>
 </body>
 </html>

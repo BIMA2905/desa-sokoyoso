@@ -306,9 +306,29 @@ footer {
 }
 
 /* Pengaturan Mobile Menu (Screen <= 950px) */
+/* Default Desktop: Tombol Hamburger Disembunyikan Total */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Pengaturan untuk Layanan Mobile (<= 950px) */
 @media (max-width: 950px) {
     .menu-toggle {
-        display: block !important;
+        display: flex; /* Muncul hanya di mobile */
     }
 
     .navbar {
@@ -317,26 +337,38 @@ footer {
         padding: 15px 20px;
     }
 
-    /* Paksa menu tertutup secara default di layar mobile */
-    .navbar ul.menu {
-        display: none !important; 
+    /* Menu disembunyikan secara default di mobile */
+    .navbar .menu {
+        display: none;
         flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: #0d47a1; /* Sesuaikan warna latar belakang menu Anda */
+        background-color: #0b3c5d; /* Warna latar belakang dropdown mobile */
         padding: 20px 0;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         text-align: center;
+        z-index: 999;
     }
 
-    /* Hanya tampilkan menu jika kelas .active aktif dari JavaScript */
-    .navbar ul.menu.active {
+    /* Ketika kelas .active aktif, menu tampil ke bawah */
+    .navbar .menu.active {
         display: flex !important;
     }
 
     .navbar .menu li {
-        margin: 10px 0;
+        margin: 12px 0;
+    }
+
+    /* Animasi ikon hamburger menjadi tanda silang (X) saat diklik */
+    .menu-toggle.is-active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    .menu-toggle.is-active span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.is-active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
     }
 }
