@@ -13,9 +13,9 @@
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="images/Logo_Sokoyoso-removebg-preview.png" alt="Logo Desa">
-        <h2>Desa Sokoyoso</h2>
-      </div>
+    <img src="{{ asset('images/Logo_Sokoyoso-removebg-preview.png') }}" alt="Logo Desa">
+    <h2>Desa Sokoyoso</h2>
+</div>
 
       <ul class="menu">
         <li><a href="#home">Home</a></li>
