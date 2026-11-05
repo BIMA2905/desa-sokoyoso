@@ -6,6 +6,26 @@
   <title>Pemerintah Desa Sokoyoso</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+  /* Sembunyikan tombol hamburger di desktop */
+  .menu-toggle {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+  }
+  .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+  }
+
+  /* Pengaturan Mobile Menu */
   @media (max-width: 950px) {
     .navbar {
         display: flex !important;
@@ -58,6 +78,7 @@
         transform: translateY(-8.5px) rotate(-45deg);
     }
 }
+</style>
 </head>
 <body>
 
