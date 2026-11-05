@@ -297,15 +297,7 @@ footer {
   }
 }
 
-/* Sembunyikan hamburger di layar besar */
-.menu-toggle {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #fff;
-}
-
-/* 1. Sembunyikan Tombol Hamburger di Layar Komputer / Desktop */
+/* Sembunyikan tombol hamburger secara default di desktop */
 .menu-toggle {
     display: none;
     cursor: pointer;
@@ -313,7 +305,6 @@ footer {
     justify-content: space-between;
     width: 28px;
     height: 20px;
-    z-index: 1000;
 }
 
 .menu-toggle span {
@@ -325,56 +316,51 @@ footer {
     transition: all 0.3s ease;
 }
 
-/* 2. Tampilan Khusus Mobile (Layar <= 950px) */
+/* Pengaturan Responsif Mobile */
 @media (max-width: 950px) {
     .navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 20px;
         position: relative;
+        padding: 15px 20px;
     }
 
-    /* Tampilkan ikon hamburger di kanan header */
+    /* Munculkan tombol hamburger di mobile */
     .menu-toggle {
         display: flex !important;
     }
 
-    /* SEMBUNYIKAN daftar menu secara mutlak di kondisi awal */
-    .navbar .menu,
-    .navbar ul.menu,
-    ul#menu-list {
+    /* SEMBUNYIKAN menu secara mutlak di mobile saat belum diklik */
+    .navbar ul.nav-menu {
         display: none !important;
         flex-direction: column !important;
         position: absolute !important;
         top: 100% !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #00695c !important; /* Warna hijau navbar desa Anda */
+        background-color: #00695c !important;
         padding: 20px 0 !important;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
         text-align: center !important;
-        z-index: 999 !important;
+        z-index: 9999 !important;
     }
 
-    /* Tampilkan menu HANYA saat tombol hamburger diklik (class .active ditambahkan) */
-    .navbar .menu.active,
-    .navbar ul.menu.active,
-    ul#menu-list.active {
+    /* Tampilkan menu HANYA ketika ada kelas .active dari JS */
+    .navbar ul.nav-menu.active {
         display: flex !important;
     }
 
-    .navbar .menu li {
+    .navbar ul.nav-menu li {
         margin: 12px 0 !important;
     }
 
-    .navbar .menu li a {
+    .navbar ul.nav-menu li a {
         color: #ffffff !important;
         font-size: 16px !important;
-        font-weight: 500 !important;
     }
 
-    /* Animasi garis hamburger berubah jadi 'X' saat diklik */
+    /* Animasi Hamburger ke Silang (X) */
     .menu-toggle.is-active span:nth-child(1) {
         transform: translateY(8.5px) rotate(45deg);
     }

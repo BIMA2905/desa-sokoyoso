@@ -24,7 +24,7 @@
     <span></span>
   </div>
 
-  <ul class="menu" id="menu-list">
+  <ul class="menu nav-menu" id="menu-list">
     <li><a href="#home">Home</a></li>
     <li><a href="#profil">Profil Desa</a></li>
     <li><a href="#layanan">Layanan</a></li>
