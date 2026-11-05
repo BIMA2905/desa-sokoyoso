@@ -14,6 +14,9 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build
 
+# Pastikan folder public memiliki izin akses yang benar
+RUN chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache
+
 # Konfigurasi Nginx lengkap dengan penanganan file statis
 RUN echo 'server {\n\
     listen 8080;\n\
@@ -37,8 +40,6 @@ RUN echo 'server {\n\
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\n\
     }\n\
 }' > /etc/nginx/sites-available/default
-
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 8080
 
