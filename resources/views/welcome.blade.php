@@ -12,20 +12,25 @@
   <!-- Navbar -->
   <header>
     <nav class="navbar">
-      <div class="logo">
+  <div class="logo">
     <img src="{{ asset('images/Logo_Sokoyoso-removebg-preview.png') }}" alt="Logo Desa">
     <h2>Desa Sokoyoso</h2>
-</div>
+  </div>
 
-      <ul class="menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#profil">Profil Desa</a></li>
-        <li><a href="#layanan">Layanan</a></li>
-        <li><a href="#berita">Berita</a></li>
-        <li><a href="#agenda">Agenda</a></li>
-        <li><a href="#kontak">Kontak</a></li>
-      </ul>
-    </nav>
+  <!-- Tombol Hamburger untuk Mobile -->
+  <div class="menu-toggle" id="mobile-menu">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <ul class="menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#profil">Profil Desa</a></li>
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#berita">Berita</a></li>
+    <li><a href="#agenda">Agenda</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+</nav>
   </header>
 
   <!-- Hero Section -->
@@ -311,5 +316,18 @@
     <p>© 2026 Pemerintah Desa Sokoyoso | All Rights Reserved</p>
   </footer>
 
+  <script>
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navMenu = document.querySelector('.navbar .menu');
+
+  mobileMenu.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    const icon = mobileMenu.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-xmark');
+  });
+</script>
+</body>
+</html>
 </body>
 </html>

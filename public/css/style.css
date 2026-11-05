@@ -296,3 +296,46 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Sembunyikan hamburger di layar besar */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* Pengaturan Mobile Menu (Screen <= 950px) */
+@media (max-width: 950px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar {
+        position: relative;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .navbar .menu {
+        display: none; /* Disembunyikan secara default */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #0d47a1; /* Sesuaikan warna background menu */
+        padding: 20px 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    /* Saat kelas active ditambahkan via JavaScript */
+    .navbar .menu.active {
+        display: flex;
+    }
+
+    .navbar .menu li {
+        margin: 10px 0;
+    }
+}
