@@ -326,13 +326,13 @@ footer {
         padding: 15px 20px;
     }
 
-    /* Munculkan tombol hamburger di mobile */
+    /* Tampilkan tombol hamburger di mobile */
     .menu-toggle {
         display: flex !important;
     }
 
-    /* SEMBUNYIKAN menu secara mutlak di mobile saat belum diklik */
-    .navbar ul.nav-menu {
+    /* PAKSA sembunyikan seluruh elemen menu di HP secara default */
+    .navbar .menu {
         display: none !important;
         flex-direction: column !important;
         position: absolute !important;
@@ -346,21 +346,21 @@ footer {
         z-index: 9999 !important;
     }
 
-    /* Tampilkan menu HANYA ketika ada kelas .active dari JS */
-    .navbar ul.nav-menu.active {
+    /* Hanya munculkan ketika kelas .active ditambahkan oleh JavaScript */
+    .navbar .menu.active {
         display: flex !important;
     }
 
-    .navbar ul.nav-menu li {
+    .navbar .menu li {
         margin: 12px 0 !important;
     }
 
-    .navbar ul.nav-menu li a {
+    .navbar .menu li a {
         color: #ffffff !important;
         font-size: 16px !important;
     }
 
-    /* Animasi Hamburger ke Silang (X) */
+    /* Animasi garis hamburger */
     .menu-toggle.is-active span:nth-child(1) {
         transform: translateY(8.5px) rotate(45deg);
     }
