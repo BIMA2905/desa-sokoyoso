@@ -6,73 +6,58 @@
   <title>Pemerintah Desa Sokoyoso</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-  /* Sembunyikan tombol hamburger di desktop */
-  .menu-toggle {
-      display: none;
-      cursor: pointer;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 28px;
-      height: 20px;
-  }
-  .menu-toggle span {
-      display: block;
-      height: 3px;
-      width: 100%;
-      background-color: #ffffff;
-      border-radius: 3px;
-      transition: all 0.3s ease;
-  }
-
-  /* Pengaturan Mobile Menu */
   @media (max-width: 950px) {
-      .navbar {
-          display: flex !important;
-          justify-content: space-between !important;
-          align-items: center !important;
-          position: relative !important;
-      }
-      .menu-toggle {
-          display: flex !important;
-      }
-      /* PAKSA SEMBUNYIKAN menu di mobile secara default */
-      .navbar .menu {
-          display: none !important;
-          flex-direction: column !important;
-          position: absolute !important;
-          top: 100% !important;
-          left: 0 !important;
-          width: 100% !important;
-          background-color: #00695c !important;
-          padding: 20px 0 !important;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
-          text-align: center !important;
-          z-index: 9999 !important;
-      }
-      /* Tampilkan menu HANYA saat kelas .active aktif dari JS */
-      .navbar .menu.active {
-          display: flex !important;
-      }
-      .navbar .menu li {
-          margin: 12px 0 !important;
-      }
-      .navbar .menu li a {
-          color: #ffffff !important;
-          font-size: 16px !important;
-      }
-      /* Animasi Tombol Hamburger jadi Silang (X) */
-      .menu-toggle.is-active span:nth-child(1) {
-          transform: translateY(8.5px) rotate(45deg);
-      }
-      .menu-toggle.is-active span:nth-child(2) {
-          opacity: 0;
-      }
-      .menu-toggle.is-active span:nth-child(3) {
-          transform: translateY(-8.5px) rotate(-45deg);
-      }
-  }
-</style>
+    .navbar {
+        display: flex !important;
+        flex-direction: row !important; /* Agar logo dan hamburger sejajar kiri-kanan */
+        justify-content: space-between !important;
+        align-items: center !important;
+        position: relative !important;
+        padding: 15px 20px !important;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+    }
+
+    .navbar .menu {
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background-color: #00695c !important;
+        padding: 20px 0 !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
+        text-align: center !important;
+        z-index: 9999 !important;
+    }
+
+    .navbar .menu.active {
+        display: flex !important;
+    }
+
+    .navbar .menu li {
+        margin: 12px 0 !important;
+    }
+
+    .navbar .menu li a {
+        color: #ffffff !important;
+        font-size: 16px !important;
+    }
+
+    /* Animasi ikon hamburger */
+    .menu-toggle.is-active span:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    .menu-toggle.is-active span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.is-active span:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+}
 </head>
 <body>
 
