@@ -29,7 +29,6 @@
   @media (max-width: 950px) {
     .navbar {
         display: flex !important;
-        flex-direction: row !important; /* Agar logo dan hamburger sejajar kiri-kanan */
         justify-content: space-between !important;
         align-items: center !important;
         position: relative !important;
@@ -40,34 +39,47 @@
         display: flex !important;
     }
 
+    /* Gaya Kotak Dropdown Melayang ala Portofolio */
     .navbar .menu {
         display: none !important;
         flex-direction: column !important;
         position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        width: 100% !important;
-        background-color: #00695c !important;
-        padding: 20px 0 !important;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
-        text-align: center !important;
+        top: 75px !important; /* Jarak pas di bawah navbar */
+        right: 20px !important; /* Menempel di sisi kanan */
+        width: 200px !important; /* Lebar kotak tidak memenuhi layar */
+        background-color: #0b2545 !important; /* Warna latar belakang gelap elegan */
+        border-radius: 12px !important; /* Sudut melengkung */
+        padding: 15px 0 !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
+        text-align: left !important; /* Teks rata kiri di dalam kotak */
         z-index: 9999 !important;
     }
 
+    /* Tampilkan menu saat diklik */
     .navbar .menu.active {
         display: flex !important;
     }
 
     .navbar .menu li {
-        margin: 12px 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
     }
 
     .navbar .menu li a {
+        display: block !important;
+        padding: 12px 20px !important;
         color: #ffffff !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
+        text-decoration: none !important;
+        transition: background 0.2s;
     }
 
-    /* Animasi ikon hamburger */
+    /* Efek hover saat disentuh */
+    .navbar .menu li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Animasi Tombol Hamburger jadi Silang (X) */
     .menu-toggle.is-active span:nth-child(1) {
         transform: translateY(8.5px) rotate(45deg);
     }
