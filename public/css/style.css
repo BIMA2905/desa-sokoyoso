@@ -308,7 +308,7 @@ footer {
 /* Pengaturan Mobile Menu (Screen <= 950px) */
 @media (max-width: 950px) {
     .menu-toggle {
-        display: block;
+        display: block !important;
     }
 
     .navbar {
@@ -317,22 +317,23 @@ footer {
         padding: 15px 20px;
     }
 
-    .navbar .menu {
-        display: none; /* Disembunyikan secara default */
+    /* Paksa menu tertutup secara default di layar mobile */
+    .navbar ul.menu {
+        display: none !important; 
         flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: #0d47a1; /* Sesuaikan warna background menu */
+        background-color: #0d47a1; /* Sesuaikan warna latar belakang menu Anda */
         padding: 20px 0;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         text-align: center;
     }
 
-    /* Saat kelas active ditambahkan via JavaScript */
-    .navbar .menu.active {
-        display: flex;
+    /* Hanya tampilkan menu jika kelas .active aktif dari JavaScript */
+    .navbar ul.menu.active {
+        display: flex !important;
     }
 
     .navbar .menu li {
