@@ -273,6 +273,7 @@
   </section>
 
   <!-- Agenda Tahunan -->
+<!-- Agenda Tahunan -->
 <section class="agenda" id="agenda">
 
   <!-- Card Judul -->
@@ -284,96 +285,31 @@
     </p>
   </div>
 
-  <!-- Isi Agenda -->
+  <!-- Isi Agenda Dinamis -->
   <div class="agenda-container">
+    @forelse($agendas as $agenda)
+      <div class="agenda-card">
+        <div class="agenda-date">
+          <h3>{{ $agenda->bulan }}</h3>
+          <span>{{ $agenda->tahun }}</span>
+        </div>
 
-    <div class="agenda-card">
-      <div class="agenda-date">
-        <h3>JAN</h3>
-        <span>2026</span>
-      </div>
+        <div class="agenda-content">
+          <h4>{{ $agenda->judul }}</h4>
 
-      <div class="agenda-content">
-        <h4>Musyawarah Desa</h4>
-
-        <p>
-          Pembahasan program kerja dan pembangunan desa bersama perangkat desa dan masyarakat.
-        </p>
-      </div>
-    </div>
-
-     <div class="agenda-card">
-      <div class="agenda-date">
-        <h3>FEB</h3>
-        <span>2026</span>
-      </div>
-
-      <div class="agenda-content">
-        <h4>Halal Bihalal Pemuda</h4>
-
-        <p>
-          Halal Bihalal Pemuda-Pemudi Desa Sokoyoso.
           <p>
-            Lokasi : Lapangan Desa Sokoyoso.
+            {{ $agenda->deskripsi }}
           </p>
-        </p>
+          @if($agenda->lokasi)
+            <p>
+              Lokasi : {{ $agenda->lokasi }}
+            </p>
+          @endif
+        </div>
       </div>
-    </div>
-
-    <div class="agenda-card">
-      <div class="agenda-date">
-        <h3>APR</h3>
-        <span>2026</span>
-      </div>
-
-      <div class="agenda-content">
-        <h4>Festival Budaya</h4>
-
-        <p>
-          Pentas seni dan budaya tradisional sebagai bentuk pelestarian budaya lokal desa.
-          <p>
-            Lokasi : Sanggar Seni Desa Sokoyoso
-          </p>
-        </p>
-      </div>
-    </div>
-
-    <div class="agenda-card">
-      <div class="agenda-date">
-        <h3>AGS</h3>
-        <span>2026</span>
-      </div>
-
-      <div class="agenda-content">
-        <h4>Lomba 17 Agustus</h4>
-
-        <p>
-          Kegiatan perlombaan dan hiburan rakyat dalam rangka memperingati Hari Kemerdekaan.
-          <p>
-            Lokasi : RT masing-masing.
-          </p>
-        </p>
-      </div>
-    </div>
-
-    <div class="agenda-card">
-      <div class="agenda-date">
-        <h3>DES</h3>
-        <span>2026</span>
-      </div>
-
-      <div class="agenda-content">
-        <h4>Pengajian Akbar</h4>
-
-        <p>
-          Kegiatan keagamaan bersama masyarakat Desa Sokoyoso di akhir tahun.
-          <p>
-            Lokasi : Dukuh Dawuhan RT 6.
-          </p>
-        </p>
-      </div>
-    </div>
-
+    @empty
+      <p class="text-center text-muted">Belum ada agenda desa yang diunggah.</p>
+    @endforelse
   </div>
 </section>
 
