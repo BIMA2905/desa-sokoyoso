@@ -178,7 +178,7 @@
 <section class="pengurus" id="pengurus">
   <h2>Struktur Kepengurusan Desa</h2>
 
-  <div class="pengurus-container">
+<div class="pengurus-container">
 
     <div class="pengurus-card">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Kepala Desa">
@@ -253,7 +253,7 @@
     <div class="berita-container">
     @forelse($beritas as $item)
         <div class="berita-card">
-            @if($item->gambar)
+            @if($item->gambar && Storage::disk('public')->exists($item->gambar))
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto Berita">
             @else
                 <img src="{{ asset('images/default.jpg') }}" alt="Default">
@@ -268,12 +268,10 @@
     @empty
         <p class="text-center text-muted">Belum ada berita yang diunggah.</p>
     @endforelse
-</div>
-</div>
+    </div>
   </section>
 
   <!-- Agenda Tahunan -->
-<!-- Agenda Tahunan -->
 <section class="agenda" id="agenda">
 
   <!-- Card Judul -->
@@ -323,9 +321,9 @@
         <p><i class="fa-solid fa-phone"></i> 0812-3456-7890</p>
         <p><i class="fa-solid fa-envelope"></i> desasokoyoso@gmail.com</p>
         <p> <i class="fa-solid fa-map-location-dot"></i>
-  
+ 
              <a href="https://share.google/49GLDUFC47NDR6G2U" target="_blank">
-              Google Maps Desa Sokoyoso
+      Google Maps Desa Sokoyoso
   </a>
 </p>
       </div>
