@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Kelola Berita Desa</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+@extends('layouts.app')
+
+@section('content')
     <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Panel Admin - Kelola Berita Desa</h2>
@@ -38,6 +33,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
+                                <th>Foto</th> <!-- Tambahan Kolom Foto -->
                                 <th>Judul Berita</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
@@ -47,6 +43,13 @@
                             @forelse($beritas as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        @if($item->foto)
+                                            <img src="{{ asset('storage/' . $item->foto) }}" alt="Foto Berita" style="width: 70px; height: 50px; object-fit: cover; border-radius: 5px;">
+                                        @else
+                                            <span class="text-muted small">Tidak ada foto</span>
+                                        @endif
+                                    </td>
                                     <td><strong>{{ $item->judul }}</strong></td>
                                     <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                     <td>
@@ -54,12 +57,12 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                     </form>
+                                       </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center text-muted">Belum ada berita yang diunggah.</td>
+                                    <td colspan="5" class="text-center text-muted">Belum ada berita yang diunggah.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -68,5 +71,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
