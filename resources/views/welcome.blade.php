@@ -27,7 +27,7 @@
 
   /* Pengaturan Mobile Menu */
   @media (max-width: 950px) {
-    /* Pastikan navbar menjadi flex row dengan jarak kiri-kanan */
+    
     .navbar {
         display: flex !important;
         flex-direction: row !important;
@@ -37,24 +37,24 @@
         padding: 15px 20px !important;
     }
 
-    /* Pastikan logo di kiri dan aman */
+    
     .navbar .logo {
         display: flex !important;
         align-items: center !important;
         gap: 10px !important;
     }
 
-    /* Tampilkan tombol hamburger di kanan */
+    
     .menu-toggle {
         display: flex !important;
     }
 
-    /* Kotak dropdown melayang pas di pojok kanan atas */
+    
     .navbar .menu {
         display: none !important;
         flex-direction: column !important;
         position: absolute !important;
-        top: 100% !important; /* Tepat menempel di bawah garis navbar */
+        top: 100% !important; 
         right: 20px !important;
         width: 200px !important;
         background-color: #004d40 !important;
@@ -65,7 +65,7 @@
         z-index: 9999 !important;
     }
 
-    /* Tampilkan menu saat kelas .active aktif */
+
     .navbar .menu.active {
         display: flex !important;
     }
@@ -87,7 +87,7 @@
         background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Animasi Tombol Hamburger jadi Silang (X) */
+   
     .menu-toggle.is-active span:nth-child(1) {
         transform: translateY(8.5px) rotate(45deg);
     }
@@ -318,7 +318,7 @@
 
       <form action="{{ route('pesan.store') }}" method="POST">
     @csrf
-    <!-- Input nama, email, dan pesan yang sudah ada -->
+ 
     <input type="text" name="nama" class="form-control mb-2" placeholder="Nama..." required>
     <input type="email" name="email" class="form-control mb-2" placeholder="Email..." required>
     <textarea name="pesan" class="form-control mb-3" placeholder="Tulis pesan..." rows="3" required></textarea>
