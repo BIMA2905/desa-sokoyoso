@@ -143,6 +143,24 @@
     </div>
 </div>
 
+<div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <!-- ... isi tabel yang sudah ada ... -->
+                </table>
+            </div>
+
+            <!-- Bagian Tombol Paginasi -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="text-muted small">
+                    Menampilkan data ke {{ $pengajuans->firstItem() ?? 0 }} sampai {{ $pengajuans->lastItem() ?? 0 }} dari total {{ $pengajuans->total() }} data
+                </div>
+                <div>
+                    {{ $pengajuans->links() }}
+                </div>
+            </div>
+        </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

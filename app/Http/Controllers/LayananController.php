@@ -87,11 +87,10 @@ class LayananController extends Controller
             $query->where('status', $request->status);
         }
 
-        $pengajuans = $query->latest()->get();
+        $pengajuans = $query->latest()->paginate(10)->withQueryString();
 
         return view('admin.layanan.index', compact('pengajuans'));
     }
-
     // Mengubah Status Surat (Setujui / Selesai / Tolak)
     public function updateStatus(Request $request, $id)
     {
