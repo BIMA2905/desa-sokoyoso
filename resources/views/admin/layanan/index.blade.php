@@ -6,7 +6,8 @@
     <title>Panel Admin - Kelola Layanan Desa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-        <div class="container my-5">
+<body>
+    <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Panel Admin Desa Sokoyoso</h2>
             <a href="/" class="btn btn-outline-secondary">Kembali ke Beranda</a>
@@ -19,6 +20,7 @@
                 <a href="{{ route('admin.pesan.index') }}" class="btn btn-outline-primary">💬 Pesan Warga</a>
                 <a href="{{ route('admin.berita.index') }}" class="btn btn-outline-primary">📰 Kelola Berita</a>
                 <a href="{{ route('admin.agenda.index') }}" class="btn btn-outline-primary">📅 Kelola Agenda</a>
+                <a href="{{ route('admin.pengurus.index') }}" class="btn btn-outline-primary">👥 Kelola Pengurus</a>
             </div>
         </div>
 
