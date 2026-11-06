@@ -32,27 +32,30 @@
 
     <div class="container mb-5">
         <!-- Tab Navigasi Menu Admin -->
-        <div class="card mb-4 shadow-sm">
-            <div class="card-body p-2">
-                <div class="d-flex flex-wrap gap-2">
-                    <a href="{{ route('admin.layanan.index') }}" class="btn btn-sm btn-outline-secondary">
-                        <i class="fa fa-file-alt"></i> Layanan Surat
-                    </a>
-                    <a href="{{ route('admin.pesan.index') }}" class="btn btn-sm btn-outline-secondary">
-                        <i class="fa fa-comments"></i> Pesan Warga
-                    </a>
-                    <a href="{{ route('admin.berita.index') }}" class="btn btn-sm btn-outline-secondary">
-                        <i class="fa fa-newspaper"></i> Kelola Berita
-                    </a>
-                    <a href="{{ route('admin.agenda.index') }}" class="btn btn-sm btn-success fw-bold">
-                        <i class="fa fa-calendar-alt"></i> Kelola Agenda
-                    </a>
-                    <a href="{{ route('admin.pengurus.index') }}" class="btn btn-sm btn-outline-secondary">
-                        <i class="fa fa-users"></i> Kelola Pengurus
-                    </a>
-                </div>
-            </div>
+       <div class="card mb-4 shadow-sm">
+    <div class="card-body p-2">
+        <div class="d-flex flex-wrap gap-2">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-gauge"></i> Dashboard
+            </a>
+            <a href="{{ route('admin.layanan.index') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-file-alt"></i> Layanan Surat
+            </a>
+            <a href="{{ route('admin.pesan.index') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-comments"></i> Pesan Warga
+            </a>
+            <a href="{{ route('admin.berita.index') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-newspaper"></i> Kelola Berita
+            </a>
+            <a href="{{ route('admin.agenda.index') }}" class="btn btn-sm btn-success fw-bold">
+                <i class="fa fa-calendar-alt"></i> Kelola Agenda
+            </a>
+            <a href="{{ route('admin.pengurus.index') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-users"></i> Kelola Pengurus
+            </a>
         </div>
+    </div>
+</div>
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
