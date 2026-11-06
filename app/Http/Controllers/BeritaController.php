@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Berita;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
@@ -32,7 +32,12 @@ class BeritaController extends Controller
 
         $gambarPath = null;
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('berita', 'public');
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            
+            // Simpan langsung ke folder public/images/berita
+            $file->move(public_path('images/berita'), $filename);
+            $gambarPath = 'images/berita/' . $filename;
         }
 
         Berita::create([
@@ -48,9 +53,12 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         $berita = Berita::findOrFail($id);
-        if ($berita->gambar) {
-            Storage::disk('public')->delete($berita->gambar);
+        
+        // Hapus file fisik gambar jika ada
+        if ($berita->gambar && file_exists(public_path($berita->gambar))) {
+            unlink(public_path($berita->gambar));
         }
+        
         $berita->delete();
 
         return back()->with('success', 'Berita berhasil dihapus!');

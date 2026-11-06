@@ -253,11 +253,11 @@
     <div class="berita-container">
     @forelse($beritas as $item)
         <div class="berita-card">
-            @if($item->gambar && Storage::disk('public')->exists($item->gambar))
-                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto Berita">
-            @else
-                <img src="{{ asset('images/default.jpg') }}" alt="Default">
-            @endif
+            @if($item->gambar && file_exists(public_path($item->gambar)))
+    <img src="{{ asset($item->gambar) }}" alt="Foto Berita">
+@else
+    <img src="{{ asset('images/default.jpg') }}" alt="Default">
+@endif
             
             <div class="berita-content">
                 <h3>{{ $item->judul }}</h3>
