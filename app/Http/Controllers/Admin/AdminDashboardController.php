@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Pengajuan;
+use App\Models\PengajuanLayanan; // Sesuaikan dengan nama file model di folder Models kamu
 use App\Models\Pesan;
 use App\Models\Berita;
 use App\Models\Agenda;
@@ -14,8 +14,8 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        $totalLayanan = Pengajuan::count();
-        $layananMenunggu = Pengajuan::where('status', 'Menunggu')->count();
+        $totalLayanan = PengajuanLayanan::count();
+        $layananMenunggu = PengajuanLayanan::where('status', 'Menunggu')->count();
         $totalPesan = Pesan::count();
         $totalBerita = Berita::count();
         $totalAgenda = Agenda::count();
