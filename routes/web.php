@@ -86,14 +86,3 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // 5. Kelola Kepengurusan Desa (CRUD Lengkap)
     Route::resource('pengurus', PengurusController::class, ['names' => 'admin.pengurus']);
 });
-
-Route::get('/buat-admin-kilat', function () {
-    \App\Models\User::firstOrCreate(
-        ['email' => 'admin@sokoyoso.desa.id'],
-        [
-            'name' => 'Admin Sokoyoso',
-            'password' => bcrypt('password123')
-        ]
-    );
-    return 'Berhasil! Akun admin sudah dibuat. Email: admin@sokoyoso.desa.id | Password: password123';
-});
