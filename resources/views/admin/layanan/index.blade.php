@@ -65,66 +65,83 @@
         @endif
 
         <!-- Konten Utama Layanan Surat -->
-        <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h5 class="mb-0 fw-bold text-dark"><i class="fa fa-file-alt text-success"></i> Kelola Pengajuan Layanan Surat</h5>
+<div class="card shadow-sm">
+    <div class="card-header bg-white py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <h5 class="mb-0 fw-bold text-dark"><i class="fa fa-file-alt text-success"></i> Kelola Pengajuan Layanan Surat</h5>
+        
+        <!-- Form Pencarian & Filter -->
+        <form action="{{ route('admin.layanan.index') }}" method="GET" class="d-flex gap-2 flex-wrap">
+            <select name="status" class="form-select form-select-sm" style="width: 140px;" onchange="this.form.submit()">
+                <option value="">Semua Status</option>
+                <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
+                <option value="Diproses" {{ request('status') == 'Diproses' ? 'selected' : '' }}>Diproses</option>
+                <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+            </select>
+            <div class="input-group input-group-sm" style="width: 220px;">
+                <input type="text" name="search" class="form-control" placeholder="Cari nama, NIK, kode..." value="{{ request('search') }}">
+                <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped align-middle">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Kode Tracking</th>
-                                <th>Jenis Layanan</th>
-                                <th>Nama Pemohon</th>
-                                <th>Tanggal</th>
-                                <th>Status Saat Ini</th>
-                                <th>Aksi / Ubah Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($pengajuans as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><strong>{{ $item->kode_tracking }}</strong></td>
-                                    <td>{{ strtoupper($item->jenis_layanan) }}</td>
-                                    <td>{{ $item->nama }}<br><small class="text-muted">NIK: {{ $item->nik }}</small></td>
-                                    <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
-                                    <td>
-                                        <span class="badge 
-                                            @if($item->status == 'Menunggu') bg-warning text-dark 
-                                            @elseif($item->status == 'Diproses') bg-info text-dark 
-                                            @elseif($item->status == 'Selesai') bg-success 
-                                            @else bg-danger @endif">
-                                            {{ $item->status }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('admin.layanan.update', $item->id) }}" method="POST" class="d-flex gap-2">
-                                            @csrf
-                                            @method('PUT')
-                                            <select name="status" class="form-select form-select-sm" style="width: 130px;">
-                                                <option value="Menunggu" {{ $item->status == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
-                                                <option value="Diproses" {{ $item->status == 'Diproses' ? 'selected' : '' }}>Diproses</option>
-                                                <option value="Selesai" {{ $item->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                                                <option value="Ditolak" {{ $item->status == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center py-4 text-muted">Belum ada pengajuan layanan masuk.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            @if(request('search') || request('status'))
+                <a href="{{ route('admin.layanan.index') }}" class="btn btn-sm btn-outline-danger" title="Reset Filter"><i class="fa fa-times"></i></a>
+            @endif
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Tracking</th>
+                        <th>Jenis Layanan</th>
+                        <th>Nama Pemohon</th>
+                        <th>Tanggal</th>
+                        <th>Status Saat Ini</th>
+                        <th>Aksi / Ubah Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($pengajuans as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><strong>{{ $item->kode_tracking }}</strong></td>
+                            <td>{{ strtoupper($item->jenis_layanan) }}</td>
+                            <td>{{ $item->nama }}<br><small class="text-muted">NIK: {{ $item->nik }}</small></td>
+                            <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
+                            <td>
+                                <span class="badge 
+                                    @if($item->status == 'Menunggu') bg-warning text-dark 
+                                    @elseif($item->status == 'Diproses') bg-info text-dark 
+                                    @elseif($item->status == 'Selesai') bg-success 
+                                    @else bg-danger @endif">
+                                    {{ $item->status }}
+                                </span>
+                            </td>
+                            <td>
+                                <form action="{{ route('admin.layanan.update', $item->id) }}" method="POST" class="d-flex gap-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="status" class="form-select form-select-sm" style="width: 130px;">
+                                        <option value="Menunggu" {{ $item->status == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
+                                        <option value="Diproses" {{ $item->status == 'Diproses' ? 'selected' : '' }}>Diproses</option>
+                                        <option value="Selesai" {{ $item->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                                        <option value="Ditolak" {{ $item->status == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">Tidak ada data pengajuan surat yang cocok dengan pencarian.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -68,9 +68,27 @@ class LayananController extends Controller
     }
 
     // Menampilkan Daftar Pengajuan di Panel Admin
-    public function adminIndex()
+    public function adminIndex(Request $request)
     {
-        $pengajuans = PengajuanLayanan::latest()->get();
+        $query = PengajuanLayanan::query();
+
+        // Fitur Pencarian (berdasarkan Nama, NIK, atau Kode Tracking)
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nama', 'LIKE', "%{$search}%")
+                  ->orWhere('nik', 'LIKE', "%{$search}%")
+                  ->orWhere('kode_tracking', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Fitur Filter Berdasarkan Status
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+
+        $pengajuans = $query->latest()->get();
+
         return view('admin.layanan.index', compact('pengajuans'));
     }
 
