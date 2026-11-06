@@ -6,7 +6,8 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\Admin\AgendaController;
-use App\Http\Controllers\Admin\AdminDashboardController; // <--- Tambahkan namespace Dashboard Admin
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\AuthController; // <--- Controller untuk Auth Login Admin
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +46,23 @@ Route::get('/layanan/cek-status', function () {
 
 Route::get('/layanan/riwayat', [LayananController::class, 'riwayat'])->name('layanan.riwayat');
 
-// Panel Admin
-Route::prefix('admin')->group(function () {
+
+/*
+|--------------------------------------------------------------------------
+| Autentikasi Admin (Login & Logout)
+|--------------------------------------------------------------------------
+*/
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+/*
+|--------------------------------------------------------------------------
+| Panel Admin (Dilindungi Proteksi Auth/Login)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     // 0. Dashboard Utama Admin (Halaman Pertama saat akses /admin)
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 

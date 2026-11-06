@@ -87,6 +87,7 @@ class LayananController extends Controller
             $query->where('status', $request->status);
         }
 
+        /** @var \Illuminate\Database\Eloquent\Builder $query */
         $pengajuans = $query->latest()->paginate(10)->withQueryString();
 
         return view('admin.layanan.index', compact('pengajuans'));

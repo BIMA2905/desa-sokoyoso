@@ -22,11 +22,19 @@
             <a class="navbar-brand fw-bold" href="{{ route('admin.layanan.index') }}">
                 <i class="fa fa-gauge"></i> Admin Desa Sokoyoso
             </a>
-            <div class="d-flex">
-                <a href="{{ route('home') }}" class="btn btn-light btn-sm text-dark fw-semibold" target="_blank">
-                    <i class="fa fa-globe"></i> Lihat Website Utama
-                </a>
-            </div>
+            <div class="d-flex align-items-center gap-2">
+            <a href="{{ route('home') }}" class="btn btn-light btn-sm text-dark fw-semibold" target="_blank">
+                <i class="fa fa-globe"></i> Lihat Website Utama
+            </a>
+
+            <!-- Tombol Logout -->
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-danger btn-sm fw-semibold">
+                    <i class="fa fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+        </div>
         </div>
     </nav>
 
