@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\PengurusController; // <--- Tambahkan namespace PengurusController
+use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\Admin\AgendaController;
+use App\Http\Controllers\Admin\AdminDashboardController; // <--- Tambahkan namespace Dashboard Admin
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\Admin\AgendaController;
 // Halaman utama website
 Route::get('/', [LayananController::class, 'index'])->name('home');
 
-// Rute untuk mengirim pesan dari halaman utama (Pastikan hanya ada satu di sini)
+// Rute untuk mengirim pesan dari halaman utama
 Route::post('/pesan/kirim', [PesanController::class, 'store'])->name('pesan.store');
 
 // Layanan Surat Domisili
@@ -46,6 +47,9 @@ Route::get('/layanan/riwayat', [LayananController::class, 'riwayat'])->name('lay
 
 // Panel Admin
 Route::prefix('admin')->group(function () {
+    // 0. Dashboard Utama Admin (Halaman Pertama saat akses /admin)
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
     // 1. Pesan Warga
     Route::get('/pesan', [PesanController::class, 'index'])->name('admin.pesan.index');
     Route::delete('/pesan/{id}', [PesanController::class, 'destroy'])->name('admin.pesan.destroy');
@@ -63,6 +67,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
     Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 
-    // 5. Kelola Kepengurusan Desa (CRUD Lengkap) <--- Tambahan Baru
+    // 5. Kelola Kepengurusan Desa (CRUD Lengkap)
     Route::resource('pengurus', PengurusController::class, ['names' => 'admin.pengurus']);
 });
