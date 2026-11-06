@@ -175,35 +175,23 @@
     </div>
   </section>
   <!-- Kepengurusan Desa -->
-<section class="pengurus" id="pengurus">
+<<section class="pengurus" id="pengurus">
   <h2>Struktur Kepengurusan Desa</h2>
 
-<div class="pengurus-container">
-
-    <div class="pengurus-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Kepala Desa">
-      <h3>Herlambang Fitnanto SE.</h3>
-      <p>Kepala Desa</p>
-    </div>
-
-    <div class="pengurus-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Sekretaris Desa">
-      <h3>Afifah SH</h3>
-      <p>Sekretaris Desa</p>
-    </div>
-
-    <div class="pengurus-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Bendahara Desa">
-      <h3>Siti Aminah</h3>
-      <p>Bendahara Desa</p>
-    </div>
-
-    <div class="pengurus-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Kaur Umum">
-      <h3>Ahmad Fauzi</h3>
-      <p>Kaur Umum</p>
-    </div>
-
+  <div class="pengurus-container">
+    @forelse($penguruses as $pengurus)
+      <div class="pengurus-card">
+        @if($pengurus->foto && file_exists(public_path($pengurus->foto)))
+          <img src="{{ asset($pengurus->foto) }}" alt="{{ $pengurus->nama }}">
+        @else
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Default">
+        @endif
+        <h3>{{ $pengurus->nama }}</h3>
+        <p>{{ $pengurus->jabatan }}</p>
+      </div>
+    @empty
+      <p class="text-center text-muted">Belum ada data kepengurusan.</p>
+    @endforelse
   </div>
 </section>
 

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
-use App\Models\Agenda; // <--- 1. Jangan lupa import model Agenda di sini
+use App\Models\Agenda;
+use App\Models\Pengurus; // <--- 1. Import Model Pengurus di sini
 use Illuminate\Http\Request;
 use App\Models\PengajuanLayanan;
 use PDF; // Jika nanti ingin pakai DomPDF untuk cetak PDF, atau bisa pakai window.print() bawaan browser
@@ -101,12 +102,13 @@ class LayananController extends Controller
         return view('layanan.riwayat', compact('pengajuans', 'nik'));
     }
 
-    // Menampilkan Halaman Utama Website (Berita & Agenda)
+    // Menampilkan Halaman Utama Website (Berita, Agenda & Pengurus)
     public function index()
     {
-        $beritas = Berita::latest()->get(); // Mengambil data berita terbaru dari database
-        $agendas = Agenda::latest()->get(); // <--- 2. Mengambil data agenda terbaru dari database
+        $beritas = Berita::latest()->get(); 
+        $agendas = Agenda::latest()->get(); 
+        $penguruses = Pengurus::all(); // <--- 2. Mengambil data kepengurusan desa dari database
         
-        return view('welcome', compact('beritas', 'agendas')); // <--- 3. Kirim $beritas dan $agendas ke view
+        return view('welcome', compact('beritas', 'agendas', 'penguruses')); // <--- 3. Kirim $penguruses ke view
     }
 }

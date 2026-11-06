@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\Admin\AgendaController; // <--- Sudah disesuaikan ke folder Admin
+use App\Http\Controllers\PengurusController; // <--- Tambahkan namespace PengurusController
+use App\Http\Controllers\Admin\AgendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +62,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/berita/buat-baru', [BeritaController::class, 'create'])->name('admin.berita.create'); 
     Route::post('/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
     Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
+
+    // 5. Kelola Kepengurusan Desa (CRUD Lengkap) <--- Tambahan Baru
+    Route::resource('pengurus', PengurusController::class, ['names' => 'admin.pengurus']);
 });
