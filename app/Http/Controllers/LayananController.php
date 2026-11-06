@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Agenda; // <--- 1. Jangan lupa import model Agenda di sini
 use Illuminate\Http\Request;
 use App\Models\PengajuanLayanan;
 use PDF; // Jika nanti ingin pakai DomPDF untuk cetak PDF, atau bisa pakai window.print() bawaan browser
@@ -37,21 +38,20 @@ class LayananController extends Controller
     }
 
     // Fitur Cek Status Pengajuan oleh Warga
-   // Fitur Cek Status Pengajuan oleh Warga
-public function cekStatus(Request $request)
-{
-    $request->validate([
-        'kode_tracking' => 'required|string',
-    ]);
+    public function cekStatus(Request $request)
+    {
+        $request->validate([
+            'kode_tracking' => 'required|string',
+        ]);
 
-    $pengajuan = PengajuanLayanan::where('kode_tracking', $request->kode_tracking)->first();
+        $pengajuan = PengajuanLayanan::where('kode_tracking', $request->kode_tracking)->first();
 
-    if (!$pengajuan) {
-        return back()->with('error', 'Kode tracking tidak ditemukan!');
+        if (!$pengajuan) {
+            return back()->with('error', 'Kode tracking tidak ditemukan!');
+        }
+
+        return view('layanan.status', compact('pengajuan'));
     }
-
-    return view('layanan.status', compact('pengajuan'));
-}
 
     // Fitur Cetak Surat (jika status sudah selesai)
     public function cetakSurat($id)
@@ -65,6 +65,7 @@ public function cekStatus(Request $request)
 
         return view('layanan.cetak', compact('pengajuan'));
     }
+
     // Menampilkan Daftar Pengajuan di Panel Admin
     public function adminIndex()
     {
@@ -87,8 +88,7 @@ public function cekStatus(Request $request)
         return back()->with('success', 'Status pengajuan berhasil diperbarui!');
     }
 
-
-// Menampilkan halaman cari & hasil riwayat berdasarkan NIK
+    // Menampilkan halaman cari & hasil riwayat berdasarkan NIK
     public function riwayat(Request $request)
     {
         $pengajuans = null;
@@ -100,9 +100,13 @@ public function cekStatus(Request $request)
 
         return view('layanan.riwayat', compact('pengajuans', 'nik'));
     }
+
+    // Menampilkan Halaman Utama Website (Berita & Agenda)
     public function index()
-{
-    $beritas = Berita::latest()->get(); // Mengambil data berita terbaru dari database
-    return view('welcome', compact('beritas')); // Kirim variabel $beritas ke view
-}
+    {
+        $beritas = Berita::latest()->get(); // Mengambil data berita terbaru dari database
+        $agendas = Agenda::latest()->get(); // <--- 2. Mengambil data agenda terbaru dari database
+        
+        return view('welcome', compact('beritas', 'agendas')); // <--- 3. Kirim $beritas dan $agendas ke view
+    }
 }

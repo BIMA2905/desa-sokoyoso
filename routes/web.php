@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\Admin\AgendaController; // <--- Sudah disesuaikan ke folder Admin
 
 /*
 |--------------------------------------------------------------------------
