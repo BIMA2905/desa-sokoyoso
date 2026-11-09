@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Berita;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // <-- Pastikan namespace ini ada
 
 class BeritaController extends Controller
 {
@@ -30,10 +29,11 @@ class BeritaController extends Controller
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-       $gambarUrl = null;
+        $gambarUrl = null;
         if ($request->hasFile('gambar')) {
-            $uploadedFileUrl = Cloudinary::upload($request->file('gambar')->getRealPath());
-            $gambarUrl = $uploadedFileUrl->getSecureUrl();
+            // Menggunakan helper global cloudinary()
+            $uploadedFile = cloudinary()->upload($request->file('gambar')->getRealPath());
+            $gambarUrl = $uploadedFile->getSecureUrl();
         }
 
         Berita::create([
