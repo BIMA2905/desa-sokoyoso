@@ -30,20 +30,19 @@ class BeritaController extends Controller
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        $gambarPath = null;
+        $gambarUrl = null;
         if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            // Upload otomatis ke Cloudinary ke folder 'desa-sokoyoso/berita'
+            $uploadedFileUrl = $request->file('gambar')->storeOnCloudinary('desa-sokoyoso/berita');
             
-            // Simpan langsung ke folder public/images/berita
-            $file->move(public_path('images/berita'), $filename);
-            $gambarPath = 'images/berita/' . $filename;
+            // Ambil URL aman (HTTPS) dari Cloudinary
+            $gambarUrl = $uploadedFileUrl->getSecureUrl();
         }
 
         Berita::create([
             'judul' => $request->judul,
             'isi' => $request->isi,
-            'gambar' => $gambarPath
+            'gambar' => $gambarUrl // Menyimpan URL Cloudinary ke database
         ]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan!');
@@ -54,10 +53,10 @@ class BeritaController extends Controller
     {
         $berita = Berita::findOrFail($id);
         
-        // Hapus file fisik gambar jika ada
-        if ($berita->gambar && file_exists(public_path($berita->gambar))) {
-            unlink(public_path($berita->gambar));
-        }
+        // Karena gambar sekarang disimpan di Cloudinary (berupa URL), 
+        // pengecekan file_exists lokal dihapus agar tidak error.
+        // Jika ingin menghapus dari Cloudinary juga bisa ditambahkan nanti, 
+        // tapi untuk sekarang cukup hapus data dari database.
         
         $berita->delete();
 
