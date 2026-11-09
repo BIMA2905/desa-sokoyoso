@@ -31,7 +31,7 @@ class BeritaController extends Controller
 
         $gambarUrl = null;
         if ($request->hasFile('gambar')) {
-            // Menggunakan helper global cloudinary()
+            // Upload ke Cloudinary menggunakan helper global
             $uploadedFile = cloudinary()->upload($request->file('gambar')->getRealPath());
             $gambarUrl = $uploadedFile->getSecureUrl();
         }
